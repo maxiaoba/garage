@@ -125,9 +125,9 @@ class BatchSampler(BaseSampler):
         undiscounted_returns = [sum(path["rewards"]) for path in paths]
         self.eprewmean.extend(undiscounted_returns)
 
-        ent = np.sum(
-            self.algo.policy.distribution.entropy(agent_infos) *
-            valids) / np.sum(valids)
+        # ent = np.sum(
+        #     self.algo.policy.distribution.entropy(agent_infos) *
+        #     valids) / np.sum(valids)
 
         samples_data = dict(
             observations=obs,
@@ -148,8 +148,8 @@ class BatchSampler(BaseSampler):
         tabular.record('AverageReturn', np.mean(undiscounted_returns))
         tabular.record('Extras/EpisodeRewardMean', np.mean(self.eprewmean))
         tabular.record('NumTrajs', len(paths))
-        tabular.record('Entropy', ent)
-        tabular.record('Perplexity', np.exp(ent))
+        # tabular.record('Entropy', ent)
+        # tabular.record('Perplexity', np.exp(ent))
         tabular.record('StdReturn', np.std(undiscounted_returns))
         tabular.record('MaxReturn', np.max(undiscounted_returns))
         tabular.record('MinReturn', np.min(undiscounted_returns))

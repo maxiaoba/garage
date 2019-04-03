@@ -189,7 +189,7 @@ set -e
 
 # Leave a note in ~/.bash_profile for the added environment variables
 if [[ "${_arg_modify_bashrc}" = on ]]; then
-  echo -e "\n# Added by the garage installer" >> "${BASH_PROF}"
+  echo -e "\n# Added by the flowrl installer" >> "${BASH_PROF}"
 fi
 
 # Set up MuJoCo 1.5 (for gym)
@@ -246,7 +246,7 @@ if [[ "${?}" -ne 0 ]]; then
 fi
 
 # Extras
-conda activate garage
+conda activate flowrl
 {
   # Prevent pip from complaining about available upgrades
   pip install --upgrade pip
@@ -270,6 +270,6 @@ if [[ "${_arg_modify_bashrc}" != on ]]; then
 fi
 
 echo -e "\ngarage is installed! To make the changes take effect, work under" \
-  "a new terminal. Also, make sure to run \`conda activate garage\`" \
+  "a new terminal. Also, make sure to run \`conda activate flowrl\`" \
   "whenever you open a new terminal and want to run programs under garage." \
   | fold -s

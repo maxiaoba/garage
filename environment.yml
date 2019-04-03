@@ -1,4 +1,4 @@
-name: garage
+name: flowrl
 channels:
   - conda-forge
 dependencies:

@@ -166,7 +166,7 @@ cd "${GARAGE_DIR}"
 
 # Leave a note in ~/.bashrc for the added environment variables
 if [[ "${_arg_modify_bashrc}" = on ]]; then
-  echo -e "\n# Added by the garage installer" >> "${BASH_RC}"
+  echo -e "\n# Added by the flowrl installer" >> "${BASH_RC}"
 fi
 
 # Set up MuJoCo (for gym)
@@ -224,7 +224,7 @@ if [[ "${?}" -ne 0 ]]; then
 fi
 
 # Extras
-conda activate garage
+conda activate flowrl
 {
   # Prevent pip from complaining about available upgrades
   pip install --upgrade pip
@@ -249,13 +249,13 @@ conda deactivate
 # Add garage to python modules
 
 if [[ "${_arg_modify_bashrc}" != on ]]; then
-  echo -e "\nRemember to execute the following commands before running garage:"
+  echo -e "\nRemember to execute the following commands before running flowrl:"
   echo "export ${LD_LIB_ENV_VAR}"
   echo ". ${CONDA_SH}"
   echo "You may wish to edit your .bashrc to prepend these commands."
 fi
 
 echo -e "\ngarage is installed! To make the changes take effect, work under" \
-  "a new terminal. Also, make sure to run \`conda activate garage\`" \
+  "a new terminal. Also, make sure to run \`conda activate flowrl\`" \
   "whenever you open a new terminal and want to run programs under garage." \
   | fold -s
