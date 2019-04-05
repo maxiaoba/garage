@@ -149,4 +149,4 @@ class FirstOrderOptimizer(Serializable):
             if abs(last_loss - new_loss) < self._tolerance:
                 break
             last_loss = new_loss
-        print('total epoch used: ',epoch)
+        print('total epoch number used: ',epoch)
