@@ -388,7 +388,7 @@ class NPO(BatchPolopt):
                     i.policy_state_info_vars,
                     name="policy_dist_info")
 
-                policy_neg_log_likeli = self.policy.distribution.log_likelihood_sym(  # noqa: E501
+                policy_neg_log_likeli = -self.policy.distribution.log_likelihood_sym(  # noqa: E501
                     i.action_var,
                     policy_dist_info,
                     name="policy_log_likeli")
@@ -410,7 +410,7 @@ class NPO(BatchPolopt):
                     i.flat.valid_var,
                     name="policy_dist_info_valid")
 
-                policy_neg_log_likeli_valid = self.policy.distribution.log_likelihood_sym(  # noqa: E501
+                policy_neg_log_likeli_valid = -self.policy.distribution.log_likelihood_sym(  # noqa: E501
                     i.valid.action_var,
                     policy_dist_info_valid,
                     name="policy_log_likeli")
