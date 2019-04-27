@@ -98,6 +98,10 @@ class NPO(BatchPolopt):
         loss_before = self.optimizer.loss(policy_opt_input_values)
         logger.log("Computing KL before")
         policy_kl_before = self.f_policy_kl(*policy_opt_input_values)
+
+        logger.log("Computing ent before")
+        policy_ent_before = self.f_policy_entropy(*policy_opt_input_values)
+
         logger.log("Optimizing")
         self.optimizer.optimize(policy_opt_input_values)
         logger.log("Computing KL after")
@@ -111,6 +115,9 @@ class NPO(BatchPolopt):
         tabular.record("{}/KLBefore".format(self.policy.name),
                        policy_kl_before)
         tabular.record("{}/KL".format(self.policy.name), policy_kl)
+
+        tabular.record("{}/EntropyBefore".format(self.policy.name), np.mean(policy_ent_before))
+
         pol_ent = self.f_policy_entropy(*policy_opt_input_values)
         tabular.record("{}/Entropy".format(self.policy.name), np.mean(pol_ent))
 
@@ -482,6 +489,7 @@ class NPO(BatchPolopt):
         policy_state_info_list = [
             samples_data["agent_infos"][k] for k in self.policy.state_info_keys
         ]
+        # print(np.max(samples_data["agent_infos"]['z']))
         policy_old_dist_info_list = [
             samples_data["agent_infos"][k]
             for k in self.policy.distribution.dist_info_keys
