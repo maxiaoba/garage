@@ -13,12 +13,13 @@ class CsvOutput(FileOutput):
     :param file_name: The file this output should log to.
     """
 
-    def __init__(self, file_name):
-        super().__init__(file_name)
+    def __init__(self, file_name, mode='w'):
+        super().__init__(file_name, mode)
         self._writer = None
         self._fieldnames = None
         self._warned_once = set()
         self._disable_warnings = False
+        self._mode = mode
 
     @property
     def types_accepted(self):
@@ -34,12 +35,20 @@ class CsvOutput(FileOutput):
                 return
 
             if not self._writer:
-                self._fieldnames = set(to_csv.keys())
-                self._writer = csv.DictWriter(
-                    self._log_file,
-                    fieldnames=self._fieldnames,
-                    extrasaction='ignore')
-                self._writer.writeheader()
+                if self._mode == 'w':
+                    self._fieldnames = set(to_csv.keys())
+                    self._writer = csv.DictWriter(
+                        self._log_file,
+                        fieldnames=self._fieldnames,
+                        extrasaction='ignore')
+                    self._writer.writeheader()
+                elif self._mode == 'a':
+                    reader = csv.DictReader(open(self._file_name,'r'))
+                    self._fieldnames = reader.fieldnames
+                    self._writer = csv.DictWriter(
+                        self._log_file,
+                        fieldnames=self._fieldnames,
+                        extrasaction='ignore')
 
             if to_csv.keys() != self._fieldnames:
                 self._warn('Inconsistent TabularInput keys detected. '
