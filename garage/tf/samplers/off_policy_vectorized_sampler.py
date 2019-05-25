@@ -95,6 +95,7 @@ class OffPolicyVectorizedSampler(BatchSampler):
                 self.algo.replay_buffer.add_transitions(
                     observation=obs,
                     action=actions,
+                    agent_infos=agent_infos,
                     goal=d_g,
                     achieved_goal=a_g,
                     terminal=dones,
@@ -109,6 +110,7 @@ class OffPolicyVectorizedSampler(BatchSampler):
                 self.algo.replay_buffer.add_transitions(
                     observation=obses,
                     action=actions,
+                    agent_infos=agent_infos,
                     reward=rewards * self.algo.reward_scale,
                     terminal=dones,
                     next_observation=next_obses,
