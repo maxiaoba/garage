@@ -52,6 +52,7 @@ class Snapshotter:
         """Save the parameters if at the right iteration."""
         if self._snapshot_dir:
             file_name = None
+            extra_file_name = None
 
             if self._snapshot_mode == 'all':
                 file_name = osp.join(self._snapshot_dir, 'itr_%d.pkl' % itr)
