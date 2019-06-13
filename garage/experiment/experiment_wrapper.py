@@ -23,7 +23,7 @@ from garage.logger import CsvOutput
 from garage.logger import logger
 from garage.logger import snapshotter
 from garage.logger import StdOutput
-from garage.logger import TensorBoardOutput
+# from garage.logger import TensorBoardOutput
 from garage.logger import TextOutput
 from garage.misc.console import colorize
 from garage.misc.console import mkdir_p
@@ -174,7 +174,7 @@ def run_experiment(argv):
 
     logger.add_output(TextOutput(text_log_file))
     logger.add_output(CsvOutput(tabular_log_file))
-    logger.add_output(TensorBoardOutput(log_dir))
+    # logger.add_output(TensorBoardOutput(log_dir))
     logger.add_output(StdOutput())
     prev_snapshot_dir = snapshotter.snapshot_dir
     prev_mode = snapshotter.snapshot_mode

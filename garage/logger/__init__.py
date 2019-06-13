@@ -8,7 +8,7 @@ from garage.logger.simple_outputs import StdOutput, TextOutput
 from garage.logger.tabular_input import TabularInput
 from garage.logger.csv_output import CsvOutput  # noqa: I100
 from garage.logger.snapshotter import Snapshotter
-from garage.logger.tensor_board_output import TensorBoardOutput
+# from garage.logger.tensor_board_output import TensorBoardOutput
 
 logger = Logger()
 tabular = TabularInput()
