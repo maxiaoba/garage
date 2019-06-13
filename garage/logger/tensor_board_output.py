@@ -10,7 +10,7 @@ distributions. We add this feature by sampling data from a
 """
 import functools
 
-import matplotlib.pyplot as plt
+# import matplotlib.pyplot as plt
 import numpy as np
 import scipy.stats
 import tensorboardX as tbx
@@ -65,8 +65,8 @@ class TensorBoardOutput(LogOutput):
     def _record_kv(self, key, value, step):
         if isinstance(value, np.ScalarType):
             self._writer.add_scalar(key, value, step)
-        elif isinstance(value, plt.Figure):
-            self._writer.add_figure(key, value, step)
+        # elif isinstance(value, plt.Figure):
+        #     self._writer.add_figure(key, value, step)
         elif isinstance(value, scipy.stats._distn_infrastructure.rv_frozen):
             shape = (self._histogram_samples, ) + value.mean().shape
             self._writer.add_histogram(key, value.rvs(shape), step)
