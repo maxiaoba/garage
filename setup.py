@@ -19,7 +19,7 @@ required = [
     'jsonmerge',
     'joblib<0.13,>=0.12',
     'matplotlib',
-    'mujoco-py<1.50.2,>=1.50.1',
+    # 'mujoco-py<1.50.2,>=1.50.1',
     'numpy==1.14.5',
     'pandas',
     'polling',
@@ -33,6 +33,7 @@ required = [
     'tensorboardX',
     'tensorflow<1.13,>=1.12.0',
     'tensorflow-probability<0.6.0,>=0.5.0',  # for tensorflow 1.12
+    'numba',
 ]
 
 # Dependencies for optional features
