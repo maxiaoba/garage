@@ -33,7 +33,7 @@ begins_with_short_option()
 # THE DEFAULTS INITIALIZATION - POSITIONALS
 _positionals=()
 # THE DEFAULTS INITIALIZATION - OPTIONALS
-_arg_mjkey=
+# _arg_mjkey=
 _arg_modify_bashrc="off"
 _arg_gpu="off"
 
@@ -56,15 +56,15 @@ parse_commandline ()
   do
     _key="$1"
     case "$_key" in
-      --mjkey)
-        test $# -lt 2 && \
-          die "Missing value for the optional argument '$_key'." 1
-        _arg_mjkey="$2"
-        shift
-        ;;
-      --mjkey=*)
-        _arg_mjkey="${_key##--mjkey=}"
-        ;;
+      # --mjkey)
+      #   test $# -lt 2 && \
+      #     die "Missing value for the optional argument '$_key'." 1
+      #   _arg_mjkey="$2"
+      #   shift
+      #   ;;
+      # --mjkey=*)
+      #   _arg_mjkey="${_key##--mjkey=}"
+      #   ;;
       --no-modify-bashrc|--modify-bashrc)
         _arg_modify_bashrc="on"
         test "${1:0:5}" = "--no-" && _arg_modify_bashrc="off"
@@ -111,9 +111,9 @@ if [[ ! -f setup.py ]] && [[ ! $(grep -Fq "name='rlgarage'," setup.py) ]]; then
 fi
 
 # Verify there's a file in the mjkey path
-test "$(file -b --mime-type ${_arg_mjkey})" == "text/plain" \
-  || _PRINT_HELP=yes die \
-  "The path ${_arg_mjkey} of the MuJoCo key is not valid." 1
+# test "$(file -b --mime-type ${_arg_mjkey})" == "text/plain" \
+#   || _PRINT_HELP=yes die \
+#   "The path ${_arg_mjkey} of the MuJoCo key is not valid." 1
 
 # Make sure that we're under the garage directory
 GARAGE_DIR="$(readlink -f $(dirname $0)/..)"
@@ -170,32 +170,32 @@ if [[ "${_arg_modify_bashrc}" = on ]]; then
 fi
 
 # Set up MuJoCo (for gym)
-if [[ ! -d "${HOME}/.mujoco/mjpro150" ]]; then
-  mkdir -p "${HOME}"/.mujoco
-  MUJOCO_ZIP="$(mktemp -d)/mujoco.zip"
-  wget https://www.roboti.us/download/mjpro150_linux.zip -O "${MUJOCO_ZIP}"
-  unzip -u "${MUJOCO_ZIP}" -d "${HOME}"/.mujoco
-else
-  print_warning "MuJoCo is already installed"
-fi
+# if [[ ! -d "${HOME}/.mujoco/mjpro150" ]]; then
+#   mkdir -p "${HOME}"/.mujoco
+#   MUJOCO_ZIP="$(mktemp -d)/mujoco.zip"
+#   wget https://www.roboti.us/download/mjpro150_linux.zip -O "${MUJOCO_ZIP}"
+#   unzip -u "${MUJOCO_ZIP}" -d "${HOME}"/.mujoco
+# else
+#   print_warning "MuJoCo is already installed"
+# fi
 # Set up MuJoCo 2.0 (for dm_control)
-if [[ ! -d "${HOME}/.mujoco/mujoco200_linux" ]]; then
-  mkdir -p "${HOME}"/.mujoco
-  MUJOCO_ZIP="$(mktemp -d)/mujoco.zip"
-  wget https://www.roboti.us/download/mujoco200_linux.zip -O "${MUJOCO_ZIP}"
-  unzip -u "${MUJOCO_ZIP}" -d "${HOME}"/.mujoco
-fi
+# if [[ ! -d "${HOME}/.mujoco/mujoco200_linux" ]]; then
+#   mkdir -p "${HOME}"/.mujoco
+#   MUJOCO_ZIP="$(mktemp -d)/mujoco.zip"
+#   wget https://www.roboti.us/download/mujoco200_linux.zip -O "${MUJOCO_ZIP}"
+#   unzip -u "${MUJOCO_ZIP}" -d "${HOME}"/.mujoco
+# fi
 # dm_control viewer requires MUJOCO_GL to be set to work
-if [[ "${_arg_modify_bashrc}" = on ]]; then
-  echo "export MUJOCO_GL=\"glfw\"" >> "${BASH_RC}"
-fi
+# if [[ "${_arg_modify_bashrc}" = on ]]; then
+#   echo "export MUJOCO_GL=\"glfw\"" >> "${BASH_RC}"
+# fi
 # Configure MuJoCo as a shared library
-export LD_LIBRARY_PATH="$LD_LIBRARY_PATH:${HOME}/.mujoco/mjpro150/bin"
-LD_LIB_ENV_VAR="LD_LIBRARY_PATH=\"\$LD_LIBRARY_PATH:${HOME}/.mujoco/mjpro150"
-LD_LIB_ENV_VAR="${LD_LIB_ENV_VAR}/bin\""
-if [[ "${_arg_modify_bashrc}" = on ]]; then
-  echo "export ${LD_LIB_ENV_VAR}" >> "${BASH_RC}"
-fi
+# export LD_LIBRARY_PATH="$LD_LIBRARY_PATH:${HOME}/.mujoco/mjpro150/bin"
+# LD_LIB_ENV_VAR="LD_LIBRARY_PATH=\"\$LD_LIBRARY_PATH:${HOME}/.mujoco/mjpro150"
+# LD_LIB_ENV_VAR="${LD_LIB_ENV_VAR}/bin\""
+# if [[ "${_arg_modify_bashrc}" = on ]]; then
+#   echo "export ${LD_LIB_ENV_VAR}" >> "${BASH_RC}"
+# fi
 
 # Set up conda
 CONDA_SH="${HOME}/miniconda2/etc/profile.d/conda.sh"
@@ -215,7 +215,7 @@ fi
 conda update -q -y conda
 
 # We need a MuJoCo key to import mujoco_py
-cp "${_arg_mjkey}" "${HOME}/.mujoco/mjkey.txt"
+# cp "${_arg_mjkey}" "${HOME}/.mujoco/mjkey.txt"
 
 # Create conda environment
 conda env create -f environment.yml
